@@ -1,9 +1,9 @@
-# 🛡️ WG-Easy Secure Auto-Installer (v7 Ultimate Autonomous Edition)
+# 🛡️ WG-Easy Secure Auto-Installer (Ultimate Autonomous Edition)
 
-![Ubuntu](https://img.shields.io/badge/Ubuntu-26.XX-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-26-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![WireGuard](https://img.shields.io/badge/WireGuard-Fast-881798?style=for-the-badge&logo=wireguard&logoColor=white)
-![Zero Maintenance](https://img.shields.io/badge/Zero_Maintenance-Autoheal-success?style=for-the-badge)
+![Security](https://img.shields.io/badge/Security-Hardened-success?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 A bulletproof, zero-maintenance deployment script to install **WG-Easy** (WireGuard + Web GUI) on Ubuntu 26.XX. This script goes far beyond a standard installation: it hardens the server, proxies the Admin UI via **Caddy**, enforces **Client-to-Client Isolation**, and implements a **Self-Healing Docker Architecture**.
