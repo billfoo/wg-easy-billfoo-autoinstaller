@@ -1,7 +1,7 @@
 #!/bin/bash
 # ==============================================================================
-# WireGuard Easy + Caddy Secure Auto-Installer for Ubuntu 26.xx
-# Version 5 - Bulletproof Bcrypt Hash Extraction (English)
+# WG-Easy + Caddy Secure Auto-Installer for Ubuntu 26
+# Version 7 - Ultimate Autonomous Edition (NAT Fix + Healthcheck + Autoheal)
 # ==============================================================================
 set -e
 
@@ -50,7 +50,6 @@ echo -e "${GREEN}[5/7] Generating Bcrypt hash...${NC}"
 docker pull ghcr.io/wg-easy/wg-easy:latest
 RAW_HASH=$(docker run --rm ghcr.io/wg-easy/wg-easy wgpw "$PASSWORD")
 
-# BUGFIX V5: Filters exactly the 60-character hash and ignores the rest (\r, newlines, etc.)
 CLEAN_HASH=$(echo -e "$RAW_HASH" | grep -oE '\$2[abxy]\$[0-9]{2}\$[./A-Za-z0-9]{53}')
 
 if [ -z "$CLEAN_HASH" ]; then
@@ -75,15 +74,22 @@ services:
       - PASSWORD_HASH=__HASH__
       - PORT=51821
       - WG_PORT=51820
-      # Maximum Security: Client-to-Client Isolation
-      - WG_POST_UP=iptables -I FORWARD -i wg0 -o wg0 -j REJECT
-      - WG_POST_DOWN=iptables -D FORWARD -i wg0 -o wg0 -j REJECT
+      # Maximum Security: Client-to-Client Isolation + Active NAT Routing
+      - WG_POST_UP=iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE; iptables -I FORWARD -i wg0 -o wg0 -j REJECT
+      - WG_POST_DOWN=iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE; iptables -D FORWARD -i wg0 -o wg0 -j REJECT
     volumes:
       - ./wireguard:/etc/wireguard
       - /lib/modules:/lib/modules:ro
     ports:
       - "51820:51820/udp"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wg", "show", "wg0"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "autoheal=true"
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -109,6 +115,15 @@ services:
       - caddy_net
     depends_on:
       - wg-easy
+
+  autoheal:
+    image: willfarrell/autoheal
+    container_name: autoheal
+    restart: unless-stopped
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=autoheal
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
   caddy_net:
