@@ -40,3 +40,62 @@ Replace `vpn.yourdomain.com` and `YourSecurePassword` with your actual details.
 
 ```bash
 curl -sSL [https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh](https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh) | sudo bash -s -- vpn.yourdomain.com YourSecurePassword
+```
+
+### 🐢 Alternative: Manual Download & Execute
+
+If you prefer to review the script before running it:
+
+```bash
+# 1. Download the script
+wget -O install.sh [https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh](https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh)
+
+# 2. Make it executable
+chmod +x install.sh
+
+# 3. Run it
+sudo ./install.sh vpn.yourdomain.com YourSecurePassword
+```
+
+---
+
+## 🏗️ Under the Hood: What does the script do?
+
+When you execute the script, it performs the following steps sequentially:
+
+1.  **Updates the System:** Runs `apt update && apt upgrade`.
+2.  **Enables IP Forwarding:** Writes the required routing rules into `/etc/sysctl.d/99-wireguard.conf` and reloads the kernel parameters.
+3.  **Hardens the Firewall (UFW):** Blocks all incoming traffic by default and opens only ports `22`, `80`, `443`, and `51820/udp`.
+4.  **Installs Docker:** Checks for Docker and installs it via the official setup script if missing.
+5.  **Generates the Hash:** Pulls the WG-Easy image to generate a secure `bcrypt` hash of your password using a precise RegEx filter.
+6.  **Creates Configurations:** Generates a highly customized `docker-compose.yml` and a `Caddyfile` in `/opt/wg-easy`.
+7.  **Spins up the Stack:** Runs `docker compose up -d` and sets up the internal Docker network.
+
+---
+
+## 🔒 Security Architecture
+
+By default, WG-Easy exposes port `51821` for the Web UI and allows connected VPN clients to communicate with each other. This setup changes that to an enterprise-grade architecture:
+
+| Component | Improvement | Result |
+| :--- | :--- | :--- |
+| **Web UI** | Removed external port mapping. | The UI is only accessible via the internal `caddy_net` Docker network. |
+| **SSL/TLS** | Proxied through Caddy. | Automatic, auto-renewing Let's Encrypt certificates. |
+| **Network** | `WG_POST_UP` / `WG_POST_DOWN` | Applies `iptables` rules inside the container to drop client-to-client packets. |
+
+---
+
+## ❓ Troubleshooting
+
+### ❌ Error 502 (Bad Gateway) when visiting the domain
+This means Caddy is working and has secured the SSL certificate, but WG-Easy is crashing.
+**Fix:** Check the container logs with `sudo docker logs wg-easy`. It is usually caused by an invalid password hash (e.g., if you used unescaped special characters in the terminal). 
+
+### ❌ Clients have no internet access
+Ensure that your VPS provider hasn't blocked IP forwarding on a hypervisor level. If you are on a Cloud provider (like AWS, Hetzner, or AWS), make sure to open UDP Port `51820` in their external web-based firewall as well.
+
+---
+
+## 📜 License
+
+This project is open-source and available under the MIT License. Feel free to fork, modify, and use it for your own infrastructure setups.
