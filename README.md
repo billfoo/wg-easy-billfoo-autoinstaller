@@ -1,12 +1,12 @@
 # 🛡️ WG-Easy Secure Auto-Installer (v7 Ultimate Autonomous Edition)
 
-![Ubuntu](https://img.shields.io/badge/Ubuntu-26-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-26.XX-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![WireGuard](https://img.shields.io/badge/WireGuard-Fast-881798?style=for-the-badge&logo=wireguard&logoColor=white)
 ![Zero Maintenance](https://img.shields.io/badge/Zero_Maintenance-Autoheal-success?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
-A bulletproof, zero-maintenance deployment script to install **WG-Easy** (WireGuard + Web GUI) on Ubuntu 26. This script goes far beyond a standard installation: it hardens the server, proxies the Admin UI via **Caddy**, enforces **Client-to-Client Isolation**, and implements a **Self-Healing Docker Architecture**.
+A bulletproof, zero-maintenance deployment script to install **WG-Easy** (WireGuard + Web GUI) on Ubuntu 26.XX. This script goes far beyond a standard installation: it hardens the server, proxies the Admin UI via **Caddy**, enforces **Client-to-Client Isolation**, and implements a **Self-Healing Docker Architecture**.
 
 ---
 
@@ -23,7 +23,7 @@ A bulletproof, zero-maintenance deployment script to install **WG-Easy** (WireGu
 
 ## 📋 Prerequisites
 
-1.  **Fresh Ubuntu 26 Server:** Logged in as `root` or a user with `sudo` privileges.
+1.  **Fresh Ubuntu 26.XX Server:** Logged in as `root` or a user with `sudo` privileges.
 2.  **A Registered Domain:** A subdomain (e.g., `vpn.example.com`) pointing via A-Record to your server's IP address.
 3.  **Cloud Firewall (Optional):** If you are using a provider like IONOS, AWS, or Hetzner, ensure you open **UDP Port 51820** in their external web-based firewall panel.
 
@@ -37,7 +37,7 @@ Replace `vpn.yourdomain.com` and `YourSecurePassword` with your actual details.
 > ⚠️ **Note:** Do not use special characters like `$` or `!` in the password via the command line to prevent bash expansion issues. Stick to alphanumeric characters.
 
 ```bash
-curl -sSL '[https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh](https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh)' | sudo bash -s -- vpn.yourdomain.com YourSecurePassword
+curl -sSL https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh | sudo bash -s -- vpn.yourdomain.com YourSecurePassword
 ```
 
 ### 🐢 Alternative: Manual Execution
@@ -46,7 +46,7 @@ If you prefer to review the code before running it:
 
 ```bash
 # 1. Download the script
-wget -O install.sh '[https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh](https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh)'
+wget -O install.sh https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh
 
 # 2. Make it executable
 chmod +x install.sh
