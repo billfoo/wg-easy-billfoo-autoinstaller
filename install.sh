@@ -135,7 +135,15 @@ sed -i "s|__HASH__|$ESCAPED_HASH|g" docker-compose.yml
 
 cat <<EOF > Caddyfile
 $DOMAIN {
-    reverse_proxy wg-easy:51821
+    @allowed_ips remote_ip 10.8.0.0/24 172.16.0.0/12
+
+    handle @allowed_ips {
+        reverse_proxy wg-easy:51821
+    }
+
+    handle {
+        abort
+    }
 }
 EOF
 
