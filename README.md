@@ -37,7 +37,7 @@ Replace `vpn.yourdomain.com` and `YourSecurePassword` with your actual details.
 > ⚠️ **Note:** Do not use special characters like `$` or `!` in the password via the command line to prevent bash expansion issues. Stick to alphanumeric characters.
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh | sudo bash -s -- vpn.yourdomain.com YourSecurePassword
+bash <(curl -sSL https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh || wget -qO - https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh)
 ```
 
 ### 🐢 Alternative: Manual Execution
@@ -46,7 +46,7 @@ If you prefer to review the code before running it:
 
 ```bash
 # 1. Download the script
-wget -O install.sh https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh
+wget -O install.sh [https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh](https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh)
 
 # 2. Make it executable
 chmod +x install.sh
