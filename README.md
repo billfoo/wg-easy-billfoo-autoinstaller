@@ -46,7 +46,7 @@ If you prefer to review the code before running it:
 
 ```bash
 # 1. Download the script
-wget -O https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh
+wget -O install.sh https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh
 
 # 2. Make it executable
 chmod +x install.sh
