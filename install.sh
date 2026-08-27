@@ -1,7 +1,7 @@
 
 #!/bin/bash
 # ==============================================================================
-# WG-Easy + Caddy Secure Auto-Installer for Ubuntu 26
+# WG-Easy + Caddy Secure Auto-Installer for Ubuntu 26.04
 # Version 11 - Forced Validation & Force Reload Update
 # ==============================================================================
 set -e
