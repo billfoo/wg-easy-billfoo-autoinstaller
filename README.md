@@ -30,7 +30,7 @@ Before you run the script, ensure you have the following information and prerequ
 To initially deploy the server, reconfigure settings, or apply updates, **always use this exact same command**. It safely handles the download (using `wget` as a fallback) and launches the interactive wizard:
 
 ```bash
-bash <(curl -sSL [https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh](https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh) || wget -qO - [https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh](https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh))
+sh <(curl -sSL https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh || wget -O - https://raw.githubusercontent.com/billfoo/wg-easy-billfoo-autoinstaller/main/install.sh)
 ```
 
 ### The Configuration Wizard
