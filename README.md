@@ -6,7 +6,7 @@
 ![Security](https://img.shields.io/badge/Security-Hardened-success?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
-A bulletproof, highly automated, and interactive deployment script to install **WG-Easy** (WireGuard + Web GUI) proxied by **Caddy** on Ubuntu. 
+A bulletproof, highly automated, and interactive deployment script to install **WG-Easy** (WireGuard + Web GUI) proxied by **Caddy** on Ubuntu 26.04. 
 
 This setup goes far beyond a standard installation. It is designed for administrators who require maximum security, zero-maintenance operations, and a strict Zero-Trust environment. It fully automates SSL certificates, enforces Client-to-Client Isolation, hardens the server firewall, and implements a Self-Healing Docker Architecture.
 
