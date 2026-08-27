@@ -1,4 +1,4 @@
-# 🛡️ WG-Easy Secure Auto-Installer
+# 🛡️ WG-Easy Billfoo Auto-Installer
 
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-26-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
